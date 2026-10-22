@@ -51,22 +51,24 @@ export default function FeaturedCollection({ onQuickView, onAddToCart, activeCat
         gsap.fromTo(
           cards,
           {
-            y: 60,
+            y: 50,
             opacity: 0,
             scale: 0.96
           },
           {
             scrollTrigger: {
-              trigger: gridRef.current,
-              start: 'top 80%',
-              toggleActions: 'play none none none'
+              trigger: sectionRef.current,
+              start: 'top 85%',
+              toggleActions: 'play none none none',
+              once: true
             },
             y: 0,
             opacity: 1,
             scale: 1,
-            stagger: 0.12,
+            stagger: 0.1,
             duration: 0.8,
-            ease: 'power3.out'
+            ease: 'power3.out',
+            clearProps: 'all'
           }
         );
       }

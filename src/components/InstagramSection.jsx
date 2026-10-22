@@ -15,18 +15,24 @@ export default function InstagramSection() {
     const ctx = gsap.context(() => {
       const tiles = gridRef.current?.querySelectorAll('.insta-tile');
       if (tiles && tiles.length > 0) {
-        gsap.from(tiles, {
-          scrollTrigger: {
-            trigger: gridRef.current,
-            start: 'top 80%',
-            toggleActions: 'play none none none'
-          },
-          y: 50,
-          opacity: 0,
-          stagger: 0.12,
-          duration: 0.8,
-          ease: 'power3.out'
-        });
+        gsap.fromTo(
+          tiles,
+          { y: 40, opacity: 0 },
+          {
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top 85%',
+              toggleActions: 'play none none none',
+              once: true
+            },
+            y: 0,
+            opacity: 1,
+            stagger: 0.1,
+            duration: 0.8,
+            ease: 'power3.out',
+            clearProps: 'all'
+          }
+        );
       }
     }, sectionRef);
 

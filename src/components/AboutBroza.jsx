@@ -15,33 +15,47 @@ export default function AboutBroza() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Manifesto Entrance
-      gsap.from(manifestoRef.current, {
-        scrollTrigger: {
-          trigger: manifestoRef.current,
-          start: 'top 80%',
-          toggleActions: 'play none none none'
-        },
-        y: 60,
-        opacity: 0,
-        duration: 0.9,
-        ease: 'power3.out'
-      });
+      if (manifestoRef.current) {
+        gsap.fromTo(
+          manifestoRef.current,
+          { y: 40, opacity: 0 },
+          {
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top 85%',
+              toggleActions: 'play none none none',
+              once: true
+            },
+            y: 0,
+            opacity: 1,
+            duration: 0.9,
+            ease: 'power3.out',
+            clearProps: 'all'
+          }
+        );
+      }
 
       // Staggered Value Cards
       const cards = cardsRef.current?.querySelectorAll('.value-card');
       if (cards && cards.length > 0) {
-        gsap.from(cards, {
-          scrollTrigger: {
-            trigger: cardsRef.current,
-            start: 'top 85%',
-            toggleActions: 'play none none none'
-          },
-          y: 40,
-          opacity: 0,
-          stagger: 0.15,
-          duration: 0.8,
-          ease: 'power3.out'
-        });
+        gsap.fromTo(
+          cards,
+          { y: 30, opacity: 0 },
+          {
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top 80%',
+              toggleActions: 'play none none none',
+              once: true
+            },
+            y: 0,
+            opacity: 1,
+            stagger: 0.12,
+            duration: 0.8,
+            ease: 'power3.out',
+            clearProps: 'all'
+          }
+        );
       }
     }, sectionRef);
 

@@ -27,31 +27,48 @@ export default function BrandStatement() {
       });
 
       // Headline entrance animation
-      gsap.from(headlineRef.current?.querySelectorAll('.statement-line'), {
-        scrollTrigger: {
-          trigger: headlineRef.current,
-          start: 'top 80%',
-          toggleActions: 'play none none none'
-        },
-        y: 80,
-        opacity: 0,
-        stagger: 0.2,
-        duration: 1,
-        ease: 'power3.out'
-      });
+      const lines = headlineRef.current?.querySelectorAll('.statement-line');
+      if (lines && lines.length > 0) {
+        gsap.fromTo(
+          lines,
+          { y: 50, opacity: 0 },
+          {
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top 85%',
+              toggleActions: 'play none none none',
+              once: true
+            },
+            y: 0,
+            opacity: 1,
+            stagger: 0.15,
+            duration: 0.9,
+            ease: 'power3.out',
+            clearProps: 'all'
+          }
+        );
+      }
 
       // Text block entrance
-      gsap.from(textBlockRef.current, {
-        scrollTrigger: {
-          trigger: textBlockRef.current,
-          start: 'top 85%',
-          toggleActions: 'play none none none'
-        },
-        y: 40,
-        opacity: 0,
-        duration: 0.9,
-        ease: 'power3.out'
-      });
+      if (textBlockRef.current) {
+        gsap.fromTo(
+          textBlockRef.current,
+          { y: 30, opacity: 0 },
+          {
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top 80%',
+              toggleActions: 'play none none none',
+              once: true
+            },
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: 'power3.out',
+            clearProps: 'all'
+          }
+        );
+      }
     }, sectionRef);
 
     return () => ctx.revert();

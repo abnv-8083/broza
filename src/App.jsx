@@ -15,9 +15,21 @@ import CartDrawer from './components/CartDrawer';
 import CustomCursor from './components/CustomCursor';
 import Toast from './components/Toast';
 import Preloader from './components/Preloader';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
+
+  // Refresh ScrollTrigger when loading curtain finishes
+  useEffect(() => {
+    if (!isLoading) {
+      const timer = setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [isLoading]);
+
   const [cartItems, setCartItems] = useState([
     // Start with 1 default mock item so the bag isn't empty on first visit
     {
