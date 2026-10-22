@@ -14,8 +14,10 @@ import QuickViewModal from './components/QuickViewModal';
 import CartDrawer from './components/CartDrawer';
 import CustomCursor from './components/CustomCursor';
 import Toast from './components/Toast';
+import Preloader from './components/Preloader';
 
 export default function App() {
+  const [isLoading, setIsLoading] = useState(true);
   const [cartItems, setCartItems] = useState([
     // Start with 1 default mock item so the bag isn't empty on first visit
     {
@@ -129,6 +131,11 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#0B0B0D] text-[#F5F5F5] relative selection:bg-[#FF00A8] selection:text-white">
+      {/* High-Fashion Initial Loading Sequence */}
+      {isLoading && (
+        <Preloader onComplete={() => setIsLoading(false)} />
+      )}
+
       {/* Desktop Custom Magnetic Cursor */}
       <CustomCursor />
 
@@ -185,6 +192,7 @@ export default function App() {
       {/* Footer */}
       <Footer 
         onCategoryClick={handleSelectCategory} 
+        onReplayIntro={() => setIsLoading(true)}
       />
 
       {/* Interactive Quick View Modal */}

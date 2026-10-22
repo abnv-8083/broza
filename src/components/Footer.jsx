@@ -2,7 +2,7 @@ import { ArrowUp, MapPin, Globe, Sparkles, MessageSquare } from 'lucide-react';
 import InstagramIcon from './InstagramIcon';
 import BrozaLogo from './BrozaLogo';
 
-export default function Footer({ onCategoryClick }) {
+export default function Footer({ onCategoryClick, onReplayIntro }) {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -195,6 +195,16 @@ export default function Footer({ onCategoryClick }) {
               TERMS OF SERVICE
             </span>
             
+            {onReplayIntro && (
+              <button
+                type="button"
+                onClick={onReplayIntro}
+                className="hover:text-[#FF00A8] transition-colors cursor-pointer text-[#A5A5A5]"
+              >
+                REPLAY INTRO ↺
+              </button>
+            )}
+
             {/* Back to top button */}
             <button
               type="button"
